@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,8 +66,19 @@ public class ItemVariableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View page = inflater.inflate(R.layout.fragment_item_variable, container, false);
-        TextView textView = page.findViewById(R.id.variables_sign);
-        textView.setText("Hello world!");
+        LinearLayout listLayout = page.findViewById(R.id.variable_list_container);
+        DataAccessObject db = new DataAccessObject(getContext());
+        ArrayList<VariableHeader> variables = db.getAllVariables();
+        for (VariableHeader variableHeader : variables) {
+            View entry = inflater.inflate(R.layout.variable_item_entry, listLayout, false);
+            TextView nameView = entry.findViewById(R.id.variable_item_entry_name);
+            nameView.setText(variableHeader.getName());
+            listLayout.addView(entry);
+        }
+
+
+
+
         return page;
     }
 }
