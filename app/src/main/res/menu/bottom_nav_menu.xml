@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Variables"
+        android:icon="@drawable/baseline_pentagon_24"
+        android:id="@+id/MenuItemVariable"/>
+    <item android:title="Connections"
+        android:icon="@drawable/outline_clear_all_24"
+        android:id="@+id/MenuItemConnection"/>
+</menu>
