@@ -4,6 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="13dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
     android:background="@drawable/border_box">
 
     <TextView
@@ -22,11 +25,12 @@
         android:textSize="23sp"/>
 
     <ImageView
+        android:id="@+id/variable_item_entry_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/baseline_watch_later_24"
         android:minWidth="35dp"
         android:minHeight="35dp"
+        android:padding="5dp"
         />
 
 

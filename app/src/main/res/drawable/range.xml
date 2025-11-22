@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Fondo transparente -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M0,0h24v24H0z"/>
+
+    <!-- Forma principal -->
+    <path
+        android:fillColor="@android:color/black"
+        android:pathData="M9,18H4v-8h5v8zM7,16v-4H6v4h1zM13,16V8h-1v8h1zM15,18h-5V6h5v12zM19,16V4h-1v12h1zM21,18h-5V2h5v16zM22,22H3v-2h19v2z"/>
+</vector>

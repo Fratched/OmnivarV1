@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/editVariableName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Variable name" />
+
+    <Spinner
+        android:id="@+id/spinnerVariableUnits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
