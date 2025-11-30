@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.testbot.DataAccessObject;
 import com.example.testbot.R;
+import com.example.testbot.analytics.AnalyticsDialog;
 import com.example.testbot.model.ConnectionHeader;
 import com.example.testbot.model.VariableHeader;
 import com.example.testbot.model.VariableType;
@@ -93,6 +94,7 @@ public class ItemConnectionFragment extends Fragment implements AddConnectionDia
 
     @Override
     public void OnConnectionClicked(ConnectionHeader connection) {
-
+        AnalyticsDialog dialog = new AnalyticsDialog(connection);
+        dialog.show(getChildFragmentManager(), "Analytics");
     }
 }

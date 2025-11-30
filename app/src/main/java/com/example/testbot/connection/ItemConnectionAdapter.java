@@ -27,6 +27,7 @@ public class ItemConnectionAdapter extends RecyclerView.Adapter<ItemConnectionAd
     public ItemConnectionAdapter(Context context, List<ConnectionHeader> connections, OnConnectionClickedListener listener) {
         this.connections = connections;
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     public interface OnConnectionClickedListener {
