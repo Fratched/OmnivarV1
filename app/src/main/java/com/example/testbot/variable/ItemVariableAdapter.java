@@ -1,4 +1,4 @@
-package com.example.testbot;
+package com.example.testbot.variable;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.testbot.R;
+import com.example.testbot.model.VariableHeader;
+import com.example.testbot.model.VariableType;
 
 import java.util.List;
 

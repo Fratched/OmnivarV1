@@ -1,4 +1,4 @@
-package com.example.testbot;
+package com.example.testbot.model;
 
 public class VariableHeader {
 

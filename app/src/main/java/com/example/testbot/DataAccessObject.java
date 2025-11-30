@@ -5,17 +5,36 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.testbot.DatabaseHelper;
+import com.example.testbot.model.ConnectionHeader;
+import com.example.testbot.model.VariableHeader;
+import com.example.testbot.model.VariableType;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataAccessObject {
-    private DatabaseHelper helper;
+    private static DataAccessObject instance;
+    private final DatabaseHelper helper;
 
-    public DataAccessObject(Context context) {
-        helper = new DatabaseHelper(context);
+    public final ArrayList<VariableHeader> variables = new ArrayList<>();
+    public final ArrayList<ConnectionHeader> connections = new ArrayList<>();
+    private boolean variablesLoaded = false;
+    private boolean connectionsLoaded = false;
+
+    private DataAccessObject(Context context) {
+        helper = new DatabaseHelper(context.getApplicationContext());
+    }
+
+    public static DataAccessObject getInstance(Context context) {
+        if (instance == null) {
+            synchronized (DataAccessObject.class) {
+                if (instance == null) {
+                    instance = new DataAccessObject(context);
+                    instance.getAllVariables();
+                    instance.getAllConnections();
+                }
+            }
+        }
+        return instance;
     }
 
     public void newVariable(VariableHeader variableHeader) {
@@ -25,6 +44,8 @@ public class DataAccessObject {
         values.put("var_unit", variableHeader.getUnit().toString());
         db.insert("variable", null, values);
         db.close();
+
+        variables.add(variableHeader);
     }
 
     public void newConnection(ConnectionHeader connectionHeader) {
@@ -34,44 +55,52 @@ public class DataAccessObject {
         values.put("var_to", connectionHeader.getTo());
         db.insert("connection", null, values);
         db.close();
+
+        connections.add(connectionHeader);
     }
 
-    public ArrayList<VariableHeader> getAllVariables() {
-        ArrayList<VariableHeader> result = new ArrayList<>();
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.query("variable",
-                new String[]{"var_name", "var_unit"},
-                null, null, null, null, null);
+    private ArrayList<VariableHeader> getAllVariables() {
+        if (!variablesLoaded) {
+            SQLiteDatabase db = helper.getReadableDatabase();
+            Cursor cursor = db.query("variable",
+                    new String[]{"var_name", "var_unit"},
+                    null, null, null, null, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(0);
-                String unitString = cursor.getString(1);
-                VariableType unit = VariableType.valueOf(unitString);
-                result.add(new VariableHeader(name, unit));
-            } while (cursor.moveToNext());
+            variables.clear();
+            if (cursor.moveToFirst()) {
+                do {
+                    String name = cursor.getString(0);
+                    String unitString = cursor.getString(1);
+                    VariableType unit = VariableType.valueOf(unitString);
+                    variables.add(new VariableHeader(name, unit));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+            variablesLoaded = true;
         }
-        cursor.close();
-        db.close();
-        return result;
+        return variables;
     }
 
-    public ArrayList<ConnectionHeader> getAllConnections() {
-        ArrayList<ConnectionHeader> result = new ArrayList<>();
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.query("connection",
-                new String[]{"var_from", "var_to"},
-                null, null, null, null, null);
+    private ArrayList<ConnectionHeader> getAllConnections() {
+        if (!connectionsLoaded) {
+            SQLiteDatabase db = helper.getReadableDatabase();
+            Cursor cursor = db.query("connection",
+                    new String[]{"var_from", "var_to"},
+                    null, null, null, null, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                String name_from = cursor.getString(0);
-                String name_to = cursor.getString(1);
-                result.add(new ConnectionHeader(name_from, name_to));
-            } while (cursor.moveToNext());
+            connections.clear();
+            if (cursor.moveToFirst()) {
+                do {
+                    String name_from = cursor.getString(0);
+                    String name_to = cursor.getString(1);
+                    connections.add(new ConnectionHeader(name_from, name_to));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+            connectionsLoaded = true;
         }
-        cursor.close();
-        db.close();
-        return result;
+        return connections;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.testbot;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.testbot.connection.ItemConnectionFragment;
 import com.example.testbot.databinding.ActivityMainBinding;
+import com.example.testbot.variable.ItemVariableFragment;
 
 public class MainActivity extends AppCompatActivity {
 

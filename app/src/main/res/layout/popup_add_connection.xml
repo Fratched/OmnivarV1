@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="First variable"
+        android:textSize="15sp"
+        android:paddingBottom="6dp"
+        android:textColor="@android:color/black" />
+
+    <Spinner
+        android:id="@+id/spinnerVariable1"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Second variable"
+        android:textSize="15sp"
+        android:paddingBottom="6dp"
+        android:textColor="@android:color/black" />
+
+    <Spinner
+        android:id="@+id/spinnerVariable2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
+    <Button
+        android:id="@+id/add_connection_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.testbot;
+package com.example.testbot.variable;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -14,6 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.example.testbot.R;
+import com.example.testbot.model.VariableType;
 
 public class AddVariableDialog extends DialogFragment {
 
@@ -52,7 +55,7 @@ public class AddVariableDialog extends DialogFragment {
         builder.setView(view);
         AlertDialog dialog = builder.create();
 
-        // Botón personalizado dentro del layout
+
         Button btn = view.findViewById(R.id.addButton);
         btn.setOnClickListener(v -> {
             String name = editName.getText().toString().trim();
