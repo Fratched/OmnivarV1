@@ -63,6 +63,15 @@ public class AnalyticsDialog extends DialogFragment {
         VariableType typeFrom = null;
         VariableType typeTo = null;
 
+        for (VariableHeader v : db.variables) {
+            if (v.getName().equals(connection.getFrom())) {
+                typeFrom = v.getUnit();
+            }
+            if (v.getName().equals(connection.getTo())) {
+                typeTo = v.getUnit();
+            }
+        }
+
         ArrayList<NoteHeader> notesA = db.getNotesForVariableLocal(connection.getFrom());
         ArrayList<NoteHeader> notesB = db.getNotesForVariableLocal(connection.getTo());
 
@@ -89,10 +98,10 @@ public class AnalyticsDialog extends DialogFragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 requireContext(),
-                android.R.layout.simple_spinner_item,
+                android.R.layout.simple_list_item_1,
                 lst
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         listView.setAdapter(adapter);
 
         Button btn = view.findViewById(R.id.closeButton);

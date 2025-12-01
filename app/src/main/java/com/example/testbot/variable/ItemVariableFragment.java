@@ -18,7 +18,8 @@ import com.example.testbot.model.VariableType;
 
 import java.util.ArrayList;
 
-public class ItemVariableFragment extends Fragment implements AddVariableDialog.AddVariableListener {
+public class ItemVariableFragment extends Fragment implements AddVariableDialog.AddVariableListener, ItemVariableAdapter.VariableClickListener {
+
 
 
     public ItemVariableFragment() {
@@ -42,7 +43,7 @@ public class ItemVariableFragment extends Fragment implements AddVariableDialog.
 
         DataAccessObject instance = DataAccessObject.getInstance(getContext());
 
-        ItemVariableAdapter adapter = new ItemVariableAdapter(getContext(), instance.variables);
+        ItemVariableAdapter adapter = new ItemVariableAdapter(getContext(), instance.variables, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
@@ -66,4 +67,9 @@ public class ItemVariableFragment extends Fragment implements AddVariableDialog.
     }
 
 
+    @Override
+    public void OnVariableClick(VariableHeader header) {
+        NoteDialog dialog = new NoteDialog(header);
+        dialog.show(getChildFragmentManager(), "AddNote");
+    }
 }

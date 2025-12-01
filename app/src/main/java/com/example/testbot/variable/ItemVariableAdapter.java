@@ -18,12 +18,19 @@ import java.util.List;
 
 public class ItemVariableAdapter extends RecyclerView.Adapter<ItemVariableAdapter.ItemVariableViewHolder> {
 
+
+    public interface VariableClickListener {
+        public void OnVariableClick(VariableHeader header);
+    }
+
     public List<VariableHeader> variables;
     private LayoutInflater inflater;
+    VariableClickListener listener;
 
-    public ItemVariableAdapter(Context context, List<VariableHeader> variables) {
+    public ItemVariableAdapter(Context context, List<VariableHeader> variables, VariableClickListener listener) {
         this.variables = variables;
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     private int getIconForVariableType(VariableType type) {
@@ -52,7 +59,7 @@ public class ItemVariableAdapter extends RecyclerView.Adapter<ItemVariableAdapte
         VariableHeader v = variables.get(position);
         holder.nameView.setText(v.getName());
         holder.iconView.setImageResource(getIconForVariableType(v.getUnit()));
-
+        holder.itemView.setOnClickListener(e -> listener.OnVariableClick(v));
 
 
     }

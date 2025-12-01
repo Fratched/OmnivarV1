@@ -53,15 +53,22 @@ public class DataAccessObject {
 
         notes.add(note);
     }
+
     public void updateNote(NoteHeader note) {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("val", note.getVal());
-        values.put("date", note.getDate());
 
-        db.update("note", values, "var_name=?", new String[]{note.getVarName()});
+        db.update(
+                "note",
+                values,
+                "var_name=? AND date=?",
+                new String[]{ note.getVarName(), String.valueOf(note.getDate()) }
+        );
+
         db.close();
     }
+
 
     public void deleteNote(String varName) {
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -171,7 +178,6 @@ public class DataAccessObject {
     }
 
     public double[] toDoubleSeries(ArrayList<NoteHeader> list, VariableType type) {
-
         double[] out = new double[list.size()];
 
         for (int i = 0; i < list.size(); i++) {
